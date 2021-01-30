@@ -16,10 +16,49 @@ function getNum(c) {
   return c.charCodeAt(0) - 65;
 }
 
-function encrypt(P, K) {
-  convert(Table[getNum(P)][getNum(K)]);
+function encryption(P, K) {
+  return getChar(getNum(P), getNum(K));
 }
 
-function decrypt(C, K) {
-  // find C in K column and get index
+function decryption(C, K) {
+  // find C in Kth column and get char at same index 0th column
+  var j = getNum(K);
+  for (var i = 0; i < 26; i++) {
+    if (getNum(C) == Table[i][j]) {
+      console.log(i, j);
+      return getChar(i, 0);
+    }
+  }
 }
+
+var output = document.querySelector("#output");
+var textarea = document.querySelector("textarea");
+var key = document.querySelector("#key");
+var encrypt = document.querySelector("#encrypt");
+var decrypt = document.querySelector("#decrypt");
+
+encrypt.addEventListener("click", () => {
+  var plainText = textarea.value.toUpperCase();
+  var secretKey = key.value.toUpperCase();
+  var j = 0;
+  cipher = "";
+  for (var i = 0; i < plainText.length; i++) {
+    cipher = cipher + encryption(plainText[i], secretKey[j]);
+    j = (j + 1) % secretKey.length;
+  }
+  output.innerHTML = cipher.toLowerCase();
+});
+
+decrypt.addEventListener("click", () => {
+  var cipher = textarea.value.toUpperCase();
+  var secretKey = key.value.toUpperCase();
+
+  var j = 0;
+  plainText = "";
+  for (var i = 0; i < cipher.length; i++) {
+    plainText = plainText + decryption(cipher[i], secretKey[j]);
+    j = (j + 1) % secretKey.length;
+  }
+  console.log(plainText);
+  output.innerHTML = plainText.toLowerCase();
+});
