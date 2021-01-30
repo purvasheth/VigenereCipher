@@ -1,7 +1,7 @@
 // Make the 26*26 table for Vigenere Cipher
 var chars = [...Array(26).keys()];
 var Table = [];
-Table.push(chars);
+Table.push([...chars]);
 for (var i = 1; i < 26; i++) {
   front = chars.shift();
   chars.push(front);
@@ -9,6 +9,7 @@ for (var i = 1; i < 26; i++) {
 }
 
 function getChar(i, j) {
+  console.log(Table[0]);
   return String.fromCharCode(65 + Table[i][j]);
 }
 
@@ -17,6 +18,7 @@ function getNum(c) {
 }
 
 function encryption(P, K) {
+  console.log(getNum(P), getNum(K));
   return getChar(getNum(P), getNum(K));
 }
 
@@ -62,3 +64,6 @@ decrypt.addEventListener("click", () => {
   console.log(plainText);
   output.innerHTML = plainText.toLowerCase();
 });
+
+console.log(encryption("A", "K"));
+console.log(decryption("K", "K"));
