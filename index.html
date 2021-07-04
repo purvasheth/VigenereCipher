@@ -9,7 +9,19 @@
 </head>
 
 <body>
-
+    <h1>Vigenere Cipher</h1>
+    <div>
+        <input type="radio" name="method" id="encrypt" />
+        <label for="encrypt">Encrypt</label>
+        <input type="radio" name="method" id="decrypt" />
+        <label for="decrypt">Decrypt</label>
+    </div>
+    <textarea rows="4" cols="70">Message with characters and numbers. @#$%^&*!123</textarea>
+    <div>
+        <label for="key">Secret Key:</label>
+        <input type="text" value="some secret" id="key" />
+    </div>
+    <div id="output"></div>
     <script src="index.js"></script>
 </body>
 
